@@ -1,0 +1,18 @@
+{
+  "title": "陽光故事學園",
+  "worlds": [{
+    "id": "ninja-math",
+    "title": "忍者數學冒險",
+    "image": "assets/ninja-map.png",
+    "chapters": [{
+      "id": "square-castle",
+      "title": "四方城堡",
+      "games": [
+        {"title": "第一關：四倍太鼓", "thumbnail": "assets/level-1.png", "path": "games/taiko/"},
+        {"title": "第二關：四倍疾走", "thumbnail": "assets/level-2.png", "path": "games/ninja-run/"},
+        {"title": "第三關：岩漿石陣", "thumbnail": "assets/level-3.png", "path": "games/lava-stones/"},
+        {"title": "第四關：終極三選一", "thumbnail": "assets/level-4.png", "path": "games/four-fitness/"}
+      ]
+    }]
+  }]
+}
