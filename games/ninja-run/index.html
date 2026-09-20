@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a252b">
+  <title>忍者疾走 · 四方城堡</title>
+  <meta name="description" content="第一身忍者跑酷遊戲。跑過四方城堡，跳起、踎低、左右閃避，再撳敵人出拳。支援 iPad 觸控同鍵盤。">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <svg class="icon-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="m14 5-7 7 7 7M7 12h14"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="m10 5 7 7-7 7M17 12H3"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="m5 11 7-7 7 7M12 4v15M5 21h14"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="m5 9 7 7 7-7M12 3v13M4 21h16"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+    <symbol id="i-sound" viewBox="0 0 24 24"><path d="m11 5-6 4H2v6h3l6 4zM15 8c3 2 3 6 0 8M18 4c6 4 6 12 0 16"/></symbol>
+    <symbol id="i-mute" viewBox="0 0 24 24"><path d="m11 5-6 4H2v6h3l6 4zM16 9l6 6M22 9l-6 6"/></symbol>
+    <symbol id="i-full" viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M21 16v5h-5M3 16v5h5"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 4 12 8-12 8z"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 2 2.7 7.3L22 12l-7.3 2.7L12 22l-2.7-7.3L2 12l7.3-2.7Z"/></symbol>
+  </defs></svg>
+  <main class="shell">
+    <div id="game" class="game" data-phase="ready" aria-label="第一身忍者跑酷遊戲">
+      <canvas id="world" aria-label="四方城堡跑道；用下方操作掣閃避，撳行近嘅盔甲木乃伊攻擊。"></canvas>
+      <div class="vignette"></div><div id="hitFlash" class="hit-flash"></div>
+      <header class="hud">
+        <div class="identity"><span class="seal">忍</span><div><strong>忍者疾走</strong><span id="stageLabel">第 1 關 / 3 · 四方城堡</span></div></div>
+        <div class="stats">
+          <div class="stat distance"><span>寶石</span><strong><b id="distance">0</b><small>/10</small></strong></div>
+          <div class="stat"><span>分數</span><strong id="score">0</strong></div>
+          <div id="hearts" class="hearts" role="img" aria-label="3 個心心"><svg><use href="#i-heart"/></svg><svg><use href="#i-heart"/></svg><svg><use href="#i-heart"/></svg></div>
+        </div>
+        <nav class="top-actions" aria-label="遊戲設定">
+          <button id="sound" class="icon-button" aria-label="關閉聲音" aria-pressed="false"><svg><use href="#i-sound"/></svg></button>
+          <button id="fullscreen" class="icon-button" aria-label="全螢幕"><svg><use href="#i-full"/></svg></button>
+          <button id="pause" class="icon-button" aria-label="暫停" disabled><svg><use href="#i-pause"/></svg></button>
+        </nav>
+      </header>
+      <div id="combo" class="combo" hidden><svg><use href="#i-spark"/></svg><strong id="comboNumber">0</strong><span>連續成功</span></div>
+      <div class="hint-area"><div id="cue" class="cue" hidden></div><div id="feedback" class="feedback" role="status" aria-live="polite"></div></div>
+      <div id="countdown" class="countdown" hidden aria-live="assertive"></div>
+      <section id="welcome" class="overlay welcome" aria-labelledby="title">
+        <div class="welcome-content">
+          <p class="eyebrow"><span></span>第一身・城堡冒險</p>
+          <h1 id="title">忍者<span>疾走</span></h1>
+          <p class="intro">挑戰三關！每關收集 4、8、12……40。</p>
+          <div class="how-to"><span><svg><use href="#i-up"/></svg>跳過木欄</span><span><svg><use href="#i-down"/></svg>踎過橫樑</span><span><svg><use href="#i-left"/></svg>閃開木箱</span><span class="punch-instruction">✦ 木乃伊行近先出拳</span></div>
+          <button id="start" class="primary-button" disabled><span id="startText">準備城堡…</span><svg><use href="#i-play"/></svg></button>
+          <p class="input-note">第二關：蝙蝠　第三關：蝙蝠＋滾石</p>
+          <p id="loadError" class="load-error" hidden>畫面未載入到，請重新載入再試。</p>
+        </div>
+        <div class="chapter-mark" aria-hidden="true"><span>四</span><span>方</span><span>城</span><span>堡</span><i>壹</i></div>
+      </section>
+      <section id="pausePanel" class="overlay panel-overlay" hidden aria-labelledby="pauseTitle"><div class="panel"><p class="eyebrow">休息一陣</p><h2 id="pauseTitle">忍者，準備好未？</h2><p>城堡會喺度等你。</p><button id="resume" class="primary-button">繼續跑<svg><use href="#i-play"/></svg></button><button id="restartPause" class="text-button">由頭再跑</button></div></section>
+      <section id="overPanel" class="overlay panel-overlay" hidden aria-labelledby="overTitle"><div class="panel"><p id="resultLabel" class="eyebrow">完成今次冒險</p><h2 id="overTitle">好嘢，小忍者！</h2><div class="results"><div><strong id="finalDistance">0</strong><span>粒寶石 / 10</span></div><div><strong id="finalScore">0</strong><span>分</span></div></div><p id="finalCombo"></p><p id="finalSequence" hidden>4 · 8 · 12 · 16 · 20<br>24 · 28 · 32 · 36 · 40</p><button id="nextLevel" class="primary-button" hidden>下一關</button><button id="restart" class="primary-button">再跑一次<svg><use href="#i-play"/></svg></button></div></section>
+      <div id="controls" class="controls" aria-label="觸控操作">
+        <div class="control-pair"><button class="control move-control" data-action="left" aria-label="移左"><svg><use href="#i-left"/></svg><span>移左</span><kbd>← / A</kbd></button><button class="control move-control" data-action="right" aria-label="移右"><svg><use href="#i-right"/></svg><span>移右</span><kbd>→ / D</kbd></button></div>
+        <div class="attack-note"><span class="target-icon">＋</span><span>撳近身木乃伊出拳</span><kbd>F</kbd></div>
+        <div class="control-pair"><button class="control jump-control" data-action="jump" aria-label="跳起"><svg><use href="#i-up"/></svg><span>跳起</span><kbd>↑ / Space</kbd></button><button class="control duck-control" data-action="duck" aria-label="踎低，長撳可以保持踎低"><svg><use href="#i-down"/></svg><span>踎低</span><kbd>↓ / S</kbd></button></div>
+      </div>
+      <div id="laneDots" class="lane-dots" aria-label="中間路線"><i></i><i class="active"></i><i></i></div>
+    </div>
+    <p class="outside-note"><span>橫向玩更投入</span><span>觸控掣 / 滑動螢幕 / 鍵盤</span></p>
+  </main>
+  <script src="game.js?v=5" defer></script>
+</body>
+</html>

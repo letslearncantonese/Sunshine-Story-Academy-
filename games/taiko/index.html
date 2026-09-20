@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<meta name="description" content="用紅藍太鼓挑戰1至40：認識4嘅倍數，配搭鼓聲同三首背景音樂。支援平板觸控。">
+<title>4嘅倍數太鼓特訓 · 鼓聲音樂版</title>
+<link rel="stylesheet" href="style.css?v=6">
+</head>
+<body>
+<div id="orientation-warning">📱<h1>將手機／平板轉橫向<br>一齊打太鼓！</h1></div>
+<main id="game-ui" class="game-container">
+<header><div class="heading"><div class="badge">4×</div><div><h1>4嘅倍數太鼓特訓</h1><p>紅掣：其他數字 ｜ 藍掣：4嘅倍數</p></div></div><div class="scores"><strong>分數：<span id="scoreDisplay">0</span></strong><span class="combo">連擊：<b id="comboDisplay">0</b></span></div></header>
+<div class="soundbar"><label>🎵 音樂 <input id="musicVolume" type="range" min="0" max="100" value="45" aria-label="背景音樂音量"></label><label>🥁 鼓聲 <input id="sfxVolume" type="range" min="0" max="100" value="80" aria-label="鼓聲音量"></label><select id="speedSelect" aria-label="音樂速度"><option value="0.8">慢 0.8×</option><option value="0.9">中 0.9×</option><option value="1" selected>快 1.0×</option><option value="1.1">極速 1.1×</option></select><button id="unlockAudioBtn">🔊 重新開聲</button><button id="pauseBtn" disabled>暫停</button><span id="audioStatus" role="status" aria-live="polite">撳「試鼓聲」或速度掣開聲</span></div>
+<section class="stage">
+<canvas id="gameCanvas" aria-label="數字由右邊移到中央圓圈，撳啱顏色鼓掣"></canvas>
+<div id="countdownScreen" class="overlay hidden countdown"><span id="countdownText"></span></div>
+<div id="startScreen" class="overlay start"><div class="start-content">
+<h2>太鼓達人 <span>4嘅倍數特訓</span></h2>
+<div class="instructions"><div class="rules"><div class="red-rule"><strong>其他數字</strong><small>例如 1、2、3、5</small><b>撳紅色大掣</b></div><div class="blue-rule"><strong>4嘅倍數</strong><small>例如 4、8、12、16</small><b>撳藍色大掣</b></div></div><p>由 1 數到 40，數字波波全部白色！<br>波波到中間就打鼓；黃色波波到圓圈中心先打；紅藍掣都得！</p></div>
+<div class="music-picker"><label for="trackSelect">背景音樂</label><select id="trackSelect"><option value="dragon">Dragon Dash（預設）</option><option value="formation">四象陣法齊出2</option><option value="rap">四象rap</option><option value="none">唔播音樂，淨係鼓聲</option></select><button id="previewBtn">▶ 試聽音樂</button><button id="testAudioBtn">🥁 試鼓聲</button></div>
+<p class="note">跟音樂拍子打鼓：開頭四拍準備，最後七拍連打！音量可調校；部分 iPhone／iPad 要用機身音量掣。</p>
+<p id="startMessage" role="status" aria-live="polite"></p>
+<h3>揀個速度，開始挑戰</h3>
+<div class="levels"><button class="level-btn turtle" data-rate="0.8">烏龜速 🐢<small>慢</small></button><button class="level-btn bike" data-rate="0.9">單車速 🚲<small>中</small></button><button class="level-btn car" data-rate="1.0">汽車速 🚗<small>快</small></button><button class="level-btn rocket" data-rate="1.1">火箭速 🚀<small>極速</small></button></div>
+</div></div>
+<div id="pauseScreen" class="overlay hidden"><h2>休息一陣 🥁</h2><button id="resumeBtn" class="primary">繼續玩</button><button id="homeBtn">返主畫面</button></div>
+<div id="gameOverScreen" class="overlay hidden"><h2 id="successTitle">特訓完成！</h2><p class="final" id="finalResult">你攞到 <strong id="finalScore">0</strong> 分！</p><button id="restartBtn" class="primary">返去主畫面</button></div>
+</section>
+<div class="drums"><button class="drum-btn blue" id="btn-ka-left" aria-label="左藍鼓：4嘅倍數，D鍵">4嘅倍數<small>D</small></button><button class="drum-btn red" id="btn-don-left" aria-label="左紅鼓：其他數字，F鍵">其他<small>F</small></button><button class="drum-btn red" id="btn-don-right" aria-label="右紅鼓：其他數字，J鍵">其他<small>J</small></button><button class="drum-btn blue" id="btn-ka-right" aria-label="右藍鼓：4嘅倍數，K鍵">4嘅倍數<small>K</small></button></div>
+</main><script src="game.js?v=6"></script>
+</body></html>
