@@ -1,0 +1,7 @@
+/* Keep the actual play area sunlit, with shading confined to readable controls. */
+html,body{background:#d9edc1}
+.game{background:#c7dfb1;border-color:#8da76b;box-shadow:0 18px 55px #42683c35}
+.vignette{background:linear-gradient(180deg,#283f2526,transparent 17%,transparent 85%,#6c4e2212)}
+.welcome{background:linear-gradient(90deg,#24432cbf,#24432c55 46%,transparent 75%)}
+.voice-status,.outside-note{color:#36522e}
+@media(orientation:portrait){.voice-status{color:#fff8e6}}

@@ -12,17 +12,21 @@ def page(title, body, prefix='', cls='picture-page'):
 <html lang="zh-HK"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>{escape(title)}</title><meta name="description" content="陽光故事學園：一齊玩遊戲、郁身體、學數學！"><meta name="theme-color" content="#d4eff9"><link rel="icon" href="{ICON}"><link rel="stylesheet" href="{prefix}assets/site.css"></head><body class="{cls}">{body}</body></html>
 '''
 
-(ROOT / 'index.html').write_text(page(catalog['title'], '''<main class="picture"><h1 class="sr-only">陽光故事學園</h1><img src="assets/home.jpg" width="1536" height="864" alt="陽光故事學園：忍者數學冒險、科學探險號、成語彩虹王國"><a class="hotspot ninja-link" href="ninja-math/" aria-label="進入忍者數學冒險"><span class="sr-only">進入忍者數學冒險</span></a></main>'''))
+(ROOT / 'index.html').write_text(page(catalog['title'], '''<main class="picture"><h1 class="sr-only">陽光故事學園</h1><img src="assets/home.jpg" width="1536" height="864" alt="陽光故事學園：忍者數學冒險、科學探險號、成語彩虹王國"><a class="hotspot ninja-link" href="ninja-math/" aria-label="進入忍者數學冒險"><span class="sr-only">進入忍者數學冒險</span></a><a class="hotspot idiom-link" href="idiom-rainbow/" aria-label="進入成語彩虹王國"><span class="sr-only">進入成語彩虹王國</span></a></main>'''))
 for world in catalog['worlds']:
     folder = ROOT / world['id']
     folder.mkdir(exist_ok=True)
-    chapter_links = ''.join(f'<a class="hotspot castle-link" href="{escape(c["id"])}/" aria-label="進入{escape(c["title"])}"><span class="sr-only">進入{escape(c["title"])}</span></a>' for c in world['chapters'])
-    body = f'<main class="picture"><h1 class="sr-only">{escape(world["title"])}</h1><img src="../{escape(world["image"])}" alt="忍者數學冒險地圖，右邊係四方城堡">{chapter_links}<a class="hotspot home-link" href="../" aria-label="返學園首頁"><span class="sr-only">返學園首頁</span></a></main>'
+    is_idiom = world['id'] == 'idiom-rainbow'
+    hotspot_class = 'garden-link' if is_idiom else 'castle-link'
+    chapter_links = ''.join(f'<a class="hotspot {hotspot_class}" href="{escape(c["id"])}/" aria-label="進入{escape(c["title"])}"><span class="sr-only">進入{escape(c["title"])}</span></a>' for c in world['chapters'])
+    home = '<a class="book-home" href="../" aria-label="返回故事書首頁"><span aria-hidden="true">📖</span><span>首頁</span></a>' if is_idiom else '<a class="hotspot home-link" href="../" aria-label="返學園首頁"><span class="sr-only">返學園首頁</span></a>'
+    map_class = 'picture idiom-map' if is_idiom else 'picture'
+    body = f'<main class="{map_class}"><h1 class="sr-only">{escape(world["title"])}</h1><img src="../{escape(world["image"])}" alt="{escape(world["title"])}地圖">{chapter_links}{home}</main>'
     (folder / 'index.html').write_text(page(world['title'], body, '../'))
     for chapter in world['chapters']:
         dest = folder / chapter['id']
         dest.mkdir(exist_ok=True)
         cards = ''.join(f'<a class="game-card" href="../../{escape(g["path"])}" aria-label="{escape(g["title"])}"><img src="../../{escape(g["thumbnail"])}" alt="{escape(g["title"])}"></a>' for g in chapter['games'])
-        body = f'<main class="selection"><header class="selection-header"><a class="back" href="../" aria-label="返忍者數學冒險地圖">← 返地圖</a><h1>{escape(chapter["title"])}</h1></header><nav class="game-grid" aria-label="揀一關開始玩">{cards}</nav></main>'
+        body = f'<main class="selection"><header class="selection-header"><a class="back" href="../" aria-label="返{escape(world["title"])}地圖">← 返地圖</a><h1>{escape(chapter["title"])}</h1><a class="back selection-home" href="../../" aria-label="返回故事書首頁">📖 首頁</a></header><nav class="game-grid" aria-label="揀一關開始玩">{cards}</nav></main>'
         (dest / 'index.html').write_text(page(chapter['title'] + '｜' + world['title'], body, '../../', 'selection-page'))
 print('Generated homepage, world map and chapter pages.')

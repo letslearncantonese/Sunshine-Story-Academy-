@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<meta name="description" content="逐字打七個急字成語：急打鼓邊，其他字打鼓中間。支援平板觸控及純鼓聲模式。">
+<title>急字成語太鼓 · 鼓聲音樂版</title>
+<link rel="stylesheet" href="style.css?v=7">
+</head>
+<body>
+<div id="orientation-warning">📱<h1>將手機／平板轉橫向<br>一齊打太鼓！</h1></div>
+<main id="game-ui" class="game-container">
+<header><div class="heading"><div class="badge">急</div><div><h1>急字成語太鼓</h1><p>急：打鼓邊 ｜ 其他字：打鼓中間</p></div></div><div class="scores"><strong>分數：<span id="scoreDisplay">0</span></strong><span class="combo">連擊：<b id="comboDisplay">0</b></span></div></header>
+<div class="soundbar"><label>🎵 音樂 <input id="musicVolume" type="range" min="0" max="100" value="45" aria-label="背景音樂音量"></label><label>🥁 鼓聲 <input id="sfxVolume" type="range" min="0" max="100" value="80" aria-label="鼓聲音量"></label><select id="speedSelect" aria-label="音樂速度"><option value="0.8">慢 0.8×</option><option value="0.9">中 0.9×</option><option value="1" selected>快 1.0×</option><option value="1.1">極速 1.1×</option></select><button id="unlockAudioBtn">🔊 重新開聲</button><button id="pauseBtn" disabled>暫停</button><span id="audioStatus" role="status" aria-live="polite">撳「試鼓聲」或速度掣開聲</span></div>
+<section class="stage">
+<canvas id="gameCanvas" aria-label="成語逐字移到中央圓圈，急打鼓邊，其他字打鼓面"></canvas>
+<div id="countdownScreen" class="overlay hidden countdown"><span id="countdownText"></span></div>
+<div id="startScreen" class="overlay start"><div class="start-content">
+<h2>太鼓達人 <span>急字成語特訓</span></h2>
+<div class="instructions"><div class="rules"><div class="red-rule"><strong>其他字</strong><small>例如 心、如、焚</small><b>打鼓中間（紅色）</b></div><div class="blue-rule"><strong>急</strong><small>見到「急」字</small><b>打鼓邊（藍色）</b></div></div><p>七個成語逐字出，每兩拍一個字！<br>準時打中 300 分；下一個字／連打到中間前補中 100 分。<br>黃色波波到中間就連打，鼓邊、鼓面都得！</p></div>
+<div class="music-picker"><label for="trackSelect">背景音樂</label><select id="trackSelect"><option value="dragon">Dragon Dash（預設）</option><option value="formation">四象陣法齊出2</option><option value="rap">四象rap</option><option value="none">冇音樂・只有打鼓音效</option></select><button id="previewBtn">▶ 試聽音樂</button><button id="testAudioBtn">🥁 試鼓聲</button></div>
+<p class="note">跟音樂拍子打鼓：開頭四拍準備，最後七拍連打！音量可調校；部分 iPhone／iPad 要用機身音量掣。</p>
+<p id="startMessage" role="status" aria-live="polite"></p>
+<h3>揀個速度，開始挑戰</h3>
+<div class="levels"><button class="level-btn turtle" data-rate="0.8">烏龜速 🐢<small>慢</small></button><button class="level-btn bike" data-rate="0.9">單車速 🚲<small>中</small></button><button class="level-btn car" data-rate="1.0">汽車速 🚗<small>快</small></button><button class="level-btn rocket" data-rate="1.1">火箭速 🚀<small>極速</small></button></div>
+</div></div>
+<div id="pauseScreen" class="overlay hidden"><h2>休息一陣 🥁</h2><button id="resumeBtn" class="primary">繼續玩</button><button id="homeBtn">返主畫面</button></div>
+<div id="gameOverScreen" class="overlay hidden"><h2 id="successTitle">特訓完成！</h2><p class="final" id="finalResult">你攞到 <strong id="finalScore">0</strong> 分！</p><button id="restartBtn" class="primary">返去主畫面</button></div>
+</section>
+<div class="drums"><button class="drum-btn blue" id="btn-ka-left" aria-label="左藍鼓：急，D鍵">急<small>D</small></button><button class="drum-btn red" id="btn-don-left" aria-label="左紅鼓：其他字，F鍵">其他<small>F</small></button><button class="drum-btn red" id="btn-don-right" aria-label="右紅鼓：其他字，J鍵">其他<small>J</small></button><button class="drum-btn blue" id="btn-ka-right" aria-label="右藍鼓：急，K鍵">急<small>K</small></button></div>
+</main><script src="game.js?v=7"></script>
+</body></html>
