@@ -1,0 +1,71 @@
+{
+  "title": "陽光故事學園",
+  "worlds": [
+    {
+      "id": "ninja-math",
+      "title": "忍者數學冒險",
+      "image": "assets/ninja-map.png",
+      "chapters": [
+        {
+          "id": "square-castle",
+          "title": "四方城堡",
+          "games": [
+            {
+              "title": "第一關：四倍太鼓",
+              "thumbnail": "assets/level-1.png",
+              "path": "games/taiko/"
+            },
+            {
+              "title": "第二關：四倍疾走",
+              "thumbnail": "assets/level-2.png",
+              "path": "games/ninja-run/"
+            },
+            {
+              "title": "第三關：岩漿石陣",
+              "thumbnail": "assets/level-3.png",
+              "path": "games/lava-stones/"
+            },
+            {
+              "title": "第四關：終極三選一",
+              "thumbnail": "assets/level-4.png",
+              "path": "games/four-fitness/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "idiom-rainbow",
+      "title": "成語彩虹王國",
+      "image": "assets/idiom-map.jpg",
+      "chapters": [
+        {
+          "id": "heart-garden",
+          "title": "心之庭園",
+          "games": [
+            {
+              "title": "第1關：心之筆記",
+              "thumbnail": "assets/heart-level-1.jpg",
+              "path": "games/heart-notes/"
+            },
+            {
+              "title": "第2關：心之燈籠",
+              "thumbnail": "assets/heart-level-2.jpg",
+              "path": "games/heart-lantern/"
+            },
+            {
+              "title": "第3關：心之河流",
+              "thumbnail": "assets/heart-level-3.jpg",
+              "path": "games/heart-river/"
+            },
+            {
+              "title": "第4關：心之太鼓",
+              "thumbnail": "assets/heart-level-4.jpg",
+              "path": "games/heart-taiko/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

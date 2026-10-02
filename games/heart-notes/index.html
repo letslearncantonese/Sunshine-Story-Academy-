@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#d9edc1">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23f8c86a'/%3E%3Ctext x='16' y='24' text-anchor='middle' font-size='24' fill='%233d5a35'%3E心%3C/text%3E%3C/svg%3E">
+  <title>狐狸尋心 · 庭園筆記</title>
+  <meta name="description" content="第一身狐狸跑酷遊戲，喺日式庭園收集心字部筆記、避開小動物，聽廣東話讀音。">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="daylight.css">
+</head>
+<body>
+  <svg class="icon-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="m14 5-7 7 7 7M7 12h14"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="m10 5 7 7-7 7M17 12H3"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="m5 11 7-7 7 7M12 4v15M5 21h14"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="m5 9 7 7 7-7M12 3v13M4 21h16"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+    <symbol id="i-sound" viewBox="0 0 24 24"><path d="m11 5-6 4H2v6h3l6 4zM15 8c3 2 3 6 0 8M18 4c6 4 6 12 0 16"/></symbol>
+    <symbol id="i-mute" viewBox="0 0 24 24"><path d="m11 5-6 4H2v6h3l6 4zM16 9l6 6M22 9l-6 6"/></symbol>
+    <symbol id="i-full" viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M21 16v5h-5M3 16v5h5"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 4 12 8-12 8z"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 2 2.7 7.3L22 12l-7.3 2.7L12 22l-2.7-7.3L2 12l7.3-2.7Z"/></symbol>
+  </defs></svg>
+  <main class="shell">
+    <div id="game" class="game" data-phase="ready" aria-label="第一身狐狸跑酷遊戲">
+      <canvas id="world" aria-label="庭園走廊；左右閃避小動物、跳過滾石、踎低避飛鳥，收集心字部筆記。"></canvas>
+      <div class="vignette"></div><div id="hitFlash" class="hit-flash"></div>
+      <header class="hud">
+        <div class="identity"><span class="seal">心</span><div><strong>狐狸尋心</strong><span id="stageLabel">第 1 關 / 3 · 庭園走廊</span></div></div>
+        <div class="stats">
+          <div class="stat distance"><span>筆記</span><strong><b id="distance">0</b><small>/11</small></strong></div>
+          <div class="stat"><span>分數</span><strong id="score">0</strong></div>
+          <div id="hearts" class="hearts" role="img" aria-label="3 個心心"><svg><use href="#i-heart"/></svg><svg><use href="#i-heart"/></svg><svg><use href="#i-heart"/></svg></div>
+        </div>
+        <nav class="top-actions" aria-label="遊戲設定">
+          <button id="sound" class="icon-button" aria-label="關閉聲音" aria-pressed="false"><svg><use href="#i-sound"/></svg></button>
+          <button id="fullscreen" class="icon-button" aria-label="全螢幕"><svg><use href="#i-full"/></svg></button>
+          <button id="pause" class="icon-button" aria-label="暫停" disabled><svg><use href="#i-pause"/></svg></button>
+        </nav>
+      </header>
+      <div id="combo" class="combo" hidden><svg><use href="#i-spark"/></svg><strong id="comboNumber">0</strong><span>連續成功</span></div>
+      <div class="hint-area"><div id="cue" class="cue" hidden></div><div id="feedback" class="feedback" role="status" aria-live="polite"></div></div>
+      <div id="countdown" class="countdown" hidden aria-live="assertive"></div>
+      <section id="welcome" class="overlay welcome" aria-labelledby="title">
+        <div class="welcome-content">
+          <p class="eyebrow"><span></span>第一身・日式庭園</p>
+          <h1 id="title">狐狸<span>尋心</span></h1>
+          <p class="intro">跟住狐狸，搵齊十一張心字部筆記！</p>
+          <div class="how-to"><span><svg><use href="#i-up"/></svg>跳過滾石</span><span><svg><use href="#i-down"/></svg>踎低避飛鳥</span><span><svg><use href="#i-left"/></svg>兩隻動物，搵空位</span><span class="punch-instruction">✦ 移到筆記嗰條路收集</span></div>
+          <button id="start" class="primary-button" disabled><span id="startText">準備庭園…</span><svg><use href="#i-play"/></svg></button>
+          <p class="input-note">三關逐步加速 · 攞到筆記就讀廣東話</p>
+          <p id="loadError" class="load-error" hidden>畫面未載入到，請重新載入再試。</p>
+        </div>
+        <div class="chapter-mark" aria-hidden="true"><span>心</span><span>字</span><span>庭</span><span>園</span><i>壹</i></div>
+      </section>
+      <section id="pausePanel" class="overlay panel-overlay" hidden aria-labelledby="pauseTitle"><div class="panel"><p class="eyebrow">休息一陣</p><h2 id="pauseTitle">狐狸，準備好未？</h2><p>庭園會喺度等你。</p><button id="resume" class="primary-button">繼續跑<svg><use href="#i-play"/></svg></button><button id="restartPause" class="text-button">由頭再跑</button></div></section>
+      <section id="overPanel" class="overlay panel-overlay" hidden aria-labelledby="overTitle"><div class="panel"><p id="resultLabel" class="eyebrow">完成今次冒險</p><h2 id="overTitle">好嘢，小狐狸！</h2><div class="results"><div><strong id="finalDistance">0</strong><span>張筆記 / 11</span></div><div><strong id="finalScore">0</strong><span>分</span></div></div><p id="finalCombo"></p><p id="finalSequence" hidden>慈 · 悲 · 怒 · 急 · 怎 · 意<br>感 · 息 · 想 · 忍 · 忘</p><button id="nextLevel" class="primary-button" hidden>下一關</button><button id="restart" class="primary-button">再跑一次<svg><use href="#i-play"/></svg></button></div></section>
+      <div id="controls" class="controls" aria-label="觸控操作">
+        <div class="control-pair"><button class="control move-control" data-action="left" aria-label="移左"><svg><use href="#i-left"/></svg><span>移左</span><kbd>← / A</kbd></button><button class="control move-control" data-action="right" aria-label="移右"><svg><use href="#i-right"/></svg><span>移右</span><kbd>→ / D</kbd></button></div>
+        <div class="word-button" aria-live="polite"><strong id="currentWord">心</strong><span>已收集筆記</span></div>
+        <div class="control-pair"><button class="control jump-control" data-action="jump" aria-label="跳起"><svg><use href="#i-up"/></svg><span>跳起</span><kbd>↑ / Space</kbd></button><button class="control duck-control" data-action="duck" aria-label="踎低，長撳可以保持踎低"><svg><use href="#i-down"/></svg><span>踎低</span><kbd>↓ / S</kbd></button></div>
+      </div>
+      <div id="laneDots" class="lane-dots" aria-label="中間路線"><i></i><i class="active"></i><i></i></div>
+    </div>
+    <p id="voiceStatus" class="voice-status" role="status"></p><p class="outside-note"><span>橫向玩更投入</span><span>觸控掣 / 滑動螢幕 / 鍵盤</span></p>
+  </main>
+  <script src="game.js?v=11" defer></script>
+</body>
+</html>
