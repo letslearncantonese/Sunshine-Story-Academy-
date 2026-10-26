@@ -12,8 +12,14 @@ def page(title, body, prefix='', cls='picture-page'):
 <html lang="zh-HK"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>{escape(title)}</title><meta name="description" content="陽光故事學園：一齊玩遊戲、郁身體、學數學！"><meta name="theme-color" content="#d4eff9"><link rel="icon" href="{ICON}"><link rel="stylesheet" href="{prefix}assets/site.css"></head><body class="{cls}">{body}</body></html>
 '''
 
-(ROOT / 'index.html').write_text(page(catalog['title'], '''<main class="picture"><h1 class="sr-only">陽光故事學園</h1><img src="assets/home.jpg" width="1536" height="864" alt="陽光故事學園：忍者數學冒險、科學探險號、成語彩虹王國"><a class="hotspot ninja-link" href="ninja-math/" aria-label="進入忍者數學冒險"><span class="sr-only">進入忍者數學冒險</span></a><a class="hotspot idiom-link" href="idiom-rainbow/" aria-label="進入成語彩虹王國"><span class="sr-only">進入成語彩虹王國</span></a></main>'''))
+(ROOT / 'index.html').write_text(page(catalog['title'], '''<main class="picture"><h1 class="sr-only">陽光故事學園</h1><img src="assets/home.jpg" width="1536" height="864" alt="陽光故事學園：忍者數學冒險、科學探險號、成語彩虹王國"><a class="hotspot ninja-link" href="ninja-math/" aria-label="進入忍者數學冒險"><span class="sr-only">進入忍者數學冒險</span></a><a class="hotspot idiom-link" href="idiom-rainbow/" aria-label="進入成語彩虹王國"><span class="sr-only">進入成語彩虹王國</span></a><a class="hotspot science-link" href="science/" aria-label="進入科學探險號"><span class="sr-only">進入科學探險號</span></a></main>'''))
 for world in catalog['worlds']:
+    if world['id'] == 'science':
+        for relative in ['science/index.html', 'science/smart-home/index.html']:
+            destination = ROOT / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_text((ROOT / 'scripts/templates' / relative).read_text())
+        continue
     folder = ROOT / world['id']
     folder.mkdir(exist_ok=True)
     is_idiom = world['id'] == 'idiom-rainbow'

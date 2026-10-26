@@ -66,6 +66,31 @@
           ]
         }
       ]
+    },
+    {
+      "id": "science",
+      "title": "科學探險號",
+      "image": "assets/science-map.jpg",
+      "chapters": [
+        {
+          "id": "smart-home",
+          "title": "智能家居",
+          "games": [
+            {
+              "title": "光度感測器",
+              "path": "games/light-sensor/"
+            },
+            {
+              "title": "草地淋水挑戰",
+              "path": "games/robot-oasis-watering/"
+            },
+            {
+              "title": "掃地機械人",
+              "path": "games/robot-vacuum-map/"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
