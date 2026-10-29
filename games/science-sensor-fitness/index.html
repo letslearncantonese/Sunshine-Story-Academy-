@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0c2740">
+<meta name="description" content="科學探險號五題感測器挑戰：跟機械人運動十秒，學習光線、溫度、紅外線、泥土水分與智能家居。">
+<title>科學探險號｜感測器三選一</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230c2740'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%2366e2dd'/%3E%3Cg fill='none' stroke='%2366e2dd' stroke-width='1.5'%3E%3Cellipse cx='16' cy='16' rx='13' ry='6' transform='rotate(45 16 16)'/%3E%3Cellipse cx='16' cy='16' rx='13' ry='6' transform='rotate(-45 16 16)'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css"><script src="chroma.js" defer></script><script src="game.js" defer></script>
+<link rel="stylesheet" href="../../assets/science-game-nav.css"></head>
+<body>
+<main id="game">
+ <header><span class="brand">科學探險號 <span class="brandDivider">/</span> 感測器任務</span><div id="progress" aria-label="遊戲進度"></div><button id="sound" class="sound" aria-label="關閉音效" aria-pressed="false">♪ 音效開</button></header>
+ <section id="start" class="screen intro">
+  <div class="badge">觀察 · 思考 · 動起來</div>
+  <h1>科學探險號<br><span>感測器三選一</span></h1>
+  <p>想好答案，跟隨動作 10 秒，再揭曉答案！</p>
+  <button id="startButton" class="primary">開始挑戰 <span aria-hidden="true">▶</span></button>
+  <div class="sub">5 題挑戰 · 感測器 × 智能家居</div>
+ </section>
+ <section id="question" class="screen board" hidden>
+  <div class="questionBanner"><div class="questionMeta"><span id="questionProgress"></span><span id="topic"></span></div><h2 id="equation"></h2></div>
+  <div id="answers"></div>
+  <div class="boardBottom">
+   <div class="boardInstruction"><strong id="exerciseName">思考答案，跟隨動作！</strong><span id="exercisePrompt">不必點選答案卡</span><span id="feedback" role="status" aria-live="polite"></span></div>
+   <div class="clockBox"><div id="timer" role="timer" aria-label="剩餘秒數">00:10</div><div class="timerTrack"><div id="timerFill"></div></div></div>
+   <div class="boardStatus"><button id="roundStart" class="primary">開始倒數 ▶</button><strong id="exerciseFeedback" role="status" aria-live="polite">準備好了嗎？</strong><span id="loading" hidden>機械人準備中…</span><button id="retryVideo" hidden>繼續播放</button></div>
+  </div>
+ </section>
+ <section id="finish" class="screen intro" hidden><div class="finishStars" aria-hidden="true">★ ★ ★ ★ ★</div><h1>任務完成！</h1><p>你已完成 5 題感測器挑戰！</p><div class="finishTag">善於觀察，勇於探索！</div><button id="replay" class="primary">再玩一次 <span aria-hidden="true">↻</span></button></section>
+ <footer><span>感測器三選一 · 科學 × 運動</span><span id="footerHint">預留活動空間，準備出發！</span></footer>
+</main>
+<a class="science-game-back" href="../../science/smart-home/">⌂ 返回智能家居</a></body></html>

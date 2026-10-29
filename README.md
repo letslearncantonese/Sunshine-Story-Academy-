@@ -44,8 +44,10 @@ Repository Settings → Pages → Deploy from a branch → `main` → `/ (root)`
 
 ## 科學探險號
 
-首頁 → 科學探險號 → 智能家居 → 光度感測器／草地淋水挑戰／掃地機械人。終極三選一標示製作中，暫未開放。每款遊戲都有返回智能家居按鈕。
+首頁 → 科學探險號 → 智能家居 → 光度感測器／草地淋水挑戰／掃地機械人。終極三選一已開放，包含五題感測器挑戰。每款遊戲都有返回智能家居按鈕。
 
 兩張圖片導覽頁由 `scripts/templates/science/` 維護；`build-pages.py` 會複製對應模板。三款遊戲完整 HTML、CSS、JavaScript、圖片及影片均存放於 `games/`，不依賴原 ChatGPT Sites 網址。
 
 移植來源版本：光度感測器 `0a58cfef9dbcc1bb2688072218509d8e12b6963f`；草地淋水 `b26d7901bf80c191e2b0205924f94302ff9fc0dd`；掃地機械人 `32cdbfdc79ab7211c4c66a6a8ddf325547484e21`。
+
+感測器三選一來源版本：51f1493862e2dbf3f92de3f30a45b718521c9cfa。

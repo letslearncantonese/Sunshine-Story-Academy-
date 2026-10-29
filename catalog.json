@@ -87,6 +87,10 @@
             {
               "title": "掃地機械人",
               "path": "games/robot-vacuum-map/"
+            },
+            {
+              "title": "終極三選一",
+              "path": "games/science-sensor-fitness/"
             }
           ]
         }
